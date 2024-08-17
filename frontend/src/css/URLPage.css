@@ -1,0 +1,66 @@
+.url-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.url {
+  display: flex;
+  padding: 50px;
+  margin: 25px 0;
+  align-items: center;
+  border: 2px dashed black;
+  border-radius: 15px;
+}
+
+.url-input {
+  padding: 12px;
+  width: 80vh;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.url-shorten-button {
+  border: 2px solid black;
+  background-color: #fff;
+  border-radius: 50%;
+  font-size: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 5px;
+}
+
+.url-shorten-button:hover {
+  background-color: #f8f1ee;
+}
+
+.duck-container {
+  position: relative;
+  width: 80%;
+  height: 200px;
+}
+
+.duck-container img {
+  position: absolute;
+  left: 0;
+  top: 50%; /* This centers it vertically */
+  transform: translate(-50%, -20%);
+  transition: transform 2s ease-in-out;
+}
+
+.tooltip {
+  position: absolute;
+  margin-top: 50px;
+  right: 0;
+  transform: translateX(-50%);
+  background-color: #9e59b4;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: calc(2px + 2vmin);
+}
+
+.shrinking-duck {
+  transform: translate(50%, 20%);
+}

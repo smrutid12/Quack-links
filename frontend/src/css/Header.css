@@ -1,0 +1,24 @@
+/* src/components/Header.css */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 2px dashed black;
+}
+
+.icon-dropdown {
+  position: relative;
+  border: 1px solid black;
+  border-radius: 50%;
+  max-width: 40px;
+  max-height: 40px;
+  overflow: hidden;
+  align-items: center;
+}
+
+.icon-image {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+}

@@ -1,0 +1,23 @@
+.footer {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-top: 2px dashed black;
+}
+.footer span {
+  font-size: calc(2px + 2vmin);
+}
+.sd-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+
+.sd-logo-image {
+  width: 50px;
+  height: 50px;
+}
