@@ -1,4 +1,4 @@
-from . import db
+from run import db
 
 class URLMapping(db.Model):
     id = db.Column(db.Integer, primary_key=True)

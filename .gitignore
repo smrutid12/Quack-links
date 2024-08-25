@@ -4,7 +4,7 @@
 /frontend/node_modules
 /.pnp
 .pnp.js
-packpage-lock.json
+/frontend/.packpage-lock.json
 
 # testing
 /coverage
@@ -25,3 +25,6 @@ yarn-error.log*
 
 # backend
 /pycache
+
+#common
+.env

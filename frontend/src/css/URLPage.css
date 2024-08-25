@@ -2,11 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
+  width: 70vw;
 }
 
 .url {
   display: flex;
-  padding: 50px;
+  padding: 10px;
   margin: 25px 0;
   align-items: center;
   border: 2px dashed black;
@@ -15,7 +17,7 @@
 
 .url-input {
   padding: 12px;
-  width: 80vh;
+  width: 70vh;
   border: 2px solid black;
   border-radius: 10px;
 }
@@ -44,7 +46,7 @@
   position: absolute;
   left: 0;
   top: 50%; /* This centers it vertically */
-  transform: translate(-50%, -20%);
+  transform: translateY(-20%);
   transition: transform 2s ease-in-out;
 }
 
@@ -52,15 +54,11 @@
   position: absolute;
   margin-top: 50px;
   right: 0;
-  transform: translateX(-50%);
+  transform: translateX(-20%);
   background-color: #9e59b4;
   border: 1px solid white;
   color: white;
   border-radius: 5px;
   padding: 5px 10px;
   font-size: calc(2px + 2vmin);
-}
-
-.shrinking-duck {
-  transform: translate(50%, 20%);
 }
