@@ -46,19 +46,30 @@ function URLPage() {
         const postResponse = await api.post("/quack_link", {
           original_url: data,
         });
-        console.log(postResponse, "djjdjdjjdjdjddjdj");
-        const getResponse = await api.get(
-          `/quack_link/${postResponse.data?.data}`
-        );
+        const shortUrl = postResponse?.data?.short_url;
+
         const endTime = Date.now();
         const loadingTime = endTime - startTime;
-        setTransitionDuration(`${loadingTime / 1000}s`);
-        setData(postResponse?.data?.short_url);
-        setTooltipMessage("Quack Quack, link is ready!");
-        setButtonLabel("↻");
+
+        // Set a minimum transition duration, e.g., 2 seconds
+        const minTransitionTime = 2000;
+        const transitionTime = Math.max(loadingTime, minTransitionTime);
+
+        setTransitionDuration(`${transitionTime / 1000}s`);
+
+        // Delay setting the short URL in the input field to match the transition
+        setTimeout(() => {
+          setData(shortUrl);
+          setTooltipMessage("Quack Quack, link is ready!");
+          setButtonLabel("↻");
+        }, transitionTime);
       } catch (error) {
-        console.error("There was an error shortening the URL:", error);
+        console.error(
+          "There was an error shortening the URL:",
+          error?.data?.error
+        );
         setTooltipMessage("Oops, something went wrong.");
+        setButtonLabel("↻");
       }
     } else {
       handleReverse();
