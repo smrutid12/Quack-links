@@ -60,9 +60,10 @@ function URLPage() {
         // Delay setting the short URL in the input field to match the transition
         setTimeout(() => {
           setData(shortUrl);
-          setTooltipMessage("Quack Quack, link is ready!");
           setButtonLabel("↻");
         }, transitionTime);
+
+        setTooltipMessage("Quack Quack, link is ready!");
       } catch (error) {
         console.error(
           "There was an error shortening the URL:",
