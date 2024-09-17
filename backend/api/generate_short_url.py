@@ -44,5 +44,5 @@ class GenerateQuackLink(Resource):
         return {'status':'Success', 'message':'URL found', 'data': url_mapping.short_url}, 200
 
 
-generate_quack_url.add_resource(GenerateQuackLink, '/quack_link')
-generate_quack_url.add_resource(GenerateQuackLink, '/quack_link/<string:short_url_id>')
+generate_quack_url.add_resource(GenerateQuackLink, 'quack_link')
+generate_quack_url.add_resource(GenerateQuackLink, 'quack_link/<string:short_url_id>')
