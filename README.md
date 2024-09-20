@@ -41,13 +41,16 @@ Quack Links is a URL shortener inspired by TinyURL. It allows users to convert l
 -PostgreSQL (Database)
 
 ##Setup Instructions
+
 ###Clone the repository:
+
 ```bash
 Copy code
 git clone https://github.com/your-username/quack-links.git
 cd quack-links
 ```
 ##Setup Frontend (React):
+
 ```bash
 Copy code
 cd client
@@ -55,7 +58,9 @@ npm install
 npm start
 ```
 ##Setup Backend (Flask):
+
 ###Create a virtual environment:
+
 ```bash
 Copy code
 python -m venv venv
@@ -68,20 +73,27 @@ pip install -r requirements.txt
 Set up PostgreSQL and update the config.py file with your DB credentials.
 ```
 ###Run the Flask server:
+
 ```bash
 Copy code
 python server/app.py
 ```
 ##Setup PostgreSQL:
+
 ###Create a PostgreSQL database named Quack_links.
+
 -Inside the database, create a table LinkMapping with columns for storing the original and shortened URLs.
+
 ##Running the Application:
+
 ###Start the React frontend (client):
+
 ```bash
 Copy code
 npm start
 ```
 ###Start the Flask backend (server):
+
 ```bash
 Copy code
 python server/app.py
@@ -90,22 +102,24 @@ The app should now be running locally. You can access it at http://localhost:300
 ##API Endpoints
 
 ###POST /quack_links
-~~~
+```
 Description: Creates a new short URL for the given long URL.
 Request Body: { "long_url": "<your-long-url>" }
 Response: Returns the shortened URL.
-~~~
+```
 ###GET /api/<short_url>
-~~~
+
+```
 Description: Redirects to the original URL associated with the short link.
-~~~
+```
 
 ##Deployment
+
 ###The application is hosted on Render:
 
-###Frontend: Hosted on Render's web service.
-###Backend: Hosted as a Flask API on Render.
-###Database: PostgreSQL database managed by Render.
+Frontend: Hosted on Render's web service.
+Backend: Hosted as a Flask API on Render.
+Database: PostgreSQL database managed by Render.
 
 ##Contributing
 
