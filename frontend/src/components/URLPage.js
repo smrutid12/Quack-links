@@ -40,12 +40,13 @@ function URLPage() {
 
   const handleButton = async () => {
     if (buttonLabel === "→") {
-      setisMoved(true);
+      
       const startTime = Date.now();
       try {
         const postResponse = await api.post("/quack_link", {
           original_url: data,
         });
+        setisMoved(true ? postResponse : false);
         const shortUrl = postResponse?.data?.short_url;
 
         const endTime = Date.now();
