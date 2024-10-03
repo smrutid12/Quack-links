@@ -46,4 +46,4 @@ class GenerateQuackLink(Resource):
         
 
 generate_quack_url.add_resource(GenerateQuackLink, 'quack_link')
-generate_quack_url.add_resource(GenerateQuackLink, 'quack_link/<string:short_url_id>')
+generate_quack_url.add_resource(GenerateQuackLink, '<string:short_url_id>')
