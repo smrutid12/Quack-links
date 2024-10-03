@@ -1,6 +1,6 @@
 import hashlib
 import os
-from flask import request
+from flask import request, redirect
 from urllib.parse import urlparse
 from flask_restx import Resource, Namespace
 from model.URLmapping import db, URLMapping
@@ -41,8 +41,9 @@ class GenerateQuackLink(Resource):
         url_mapping = URLMapping.query.filter_by(short_url=short_url_id).first()
         if not url_mapping:
             return {'status':'Failed', 'message':'URL not found'}, 404
-        return {'status':'Success', 'message':'URL found', 'data': url_mapping.short_url}, 200
-
+        # Redirect to the original long URL
+        return redirect(url_mapping.long_url), 302
+        
 
 generate_quack_url.add_resource(GenerateQuackLink, 'quack_link')
 generate_quack_url.add_resource(GenerateQuackLink, 'quack_link/<string:short_url_id>')
