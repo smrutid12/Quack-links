@@ -2,7 +2,7 @@
 
 Quack Links is a URL shortener inspired by TinyURL. It allows users to convert long URLs into short, manageable links that are easier to share. The application is built with **React** for the frontend, **Flask** for the backend, and uses **PostgreSQL** as the database. The project is hosted on **Render**.
 
-![image](https://github.com/user-attachments/assets/)
+<img width="1294" alt="Quacklinks_screenshot" src="https://github.com/user-attachments/assets/c25704dd-dd2c-4945-a023-ab16315bd07f">
 
 ## Features
 
