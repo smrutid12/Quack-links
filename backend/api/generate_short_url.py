@@ -42,7 +42,7 @@ class GenerateQuackLink(Resource):
         if not url_mapping:
             return {'status':'Failed', 'message':'URL not found'}, 404
         # Redirect to the original long URL
-        return redirect(url_mapping.long_url), 302
+        return redirect(url_mapping.long_url)
         
 
 generate_quack_url.add_resource(GenerateQuackLink, 'quack_link')
