@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "../css/URLPage.css";
-import api from "../axios"; // Import your axios instance
+import { api } from "../axios"; // Import your axios instance
 
 function URLPage() {
   const [data, setData] = useState("");
