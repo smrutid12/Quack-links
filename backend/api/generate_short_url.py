@@ -64,6 +64,7 @@ class FetchQuackLink(Resource):
         url_mapping = URLMapping.query.filter_by(short_url=short_url_id).first()
         if not url_mapping:
             return {'error': 'URL not found'}, 404
-        return redirect(url_mapping.long_url), 302
+        return redirect(url_mapping.original_url, code=302)
+    
 generate_quack_url.add_resource(GenerateQuackLink, 'quack_link')
 generate_quack_url.add_resource(FetchQuackLink, '<string:short_url_id>')

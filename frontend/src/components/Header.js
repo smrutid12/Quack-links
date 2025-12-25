@@ -10,7 +10,11 @@ function Header() {
       </div>
 
       <div className="icon-dropdown">
-        <img src="forwardduck.png" className="icon-image" />
+        <img
+          src="forwardduck.png"
+          className="icon-image"
+          alt="duck moving forward"
+        />
       </div>
     </div>
   );

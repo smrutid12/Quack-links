@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "../css/Footer.css";
 
 function Footer() {
@@ -7,8 +6,12 @@ function Footer() {
       <div></div>
       <div className="sd-logo">
         <span>Made with love by </span>
-        <a href="https://www.linkedin.com/in/smruti-dash-1210/" target="_blank">
-          <img src="Smruti-dash-logo.png" className="sd-logo-image" />
+        <a href="https://smrutidash.com" target="_blank" rel="noreferrer">
+          <img
+            src="Smruti-dash-logo.png"
+            className="sd-logo-image"
+            alt="my-logo"
+          />
         </a>
       </div>
     </div>
