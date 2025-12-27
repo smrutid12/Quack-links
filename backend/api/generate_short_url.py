@@ -48,9 +48,10 @@ class GenerateQuackLink(Resource):
             existing_mapping = URLMapping.query.filter_by(short_url=short_url_id).first()
             
             if not existing_mapping:
-                new_mapping = URLMapping(original_url=original_url, short_url=short_url_id, status='Success')
+                new_mapping = URLMapping(original_url=original_url, short_url=short_url_id, status='active')
                 db.session.add(new_mapping)
                 db.session.commit()
+
 
             return {"short_url": short_url, "url_id": short_url_id}, 200
         return {"error": "No URL provided"}, 400
