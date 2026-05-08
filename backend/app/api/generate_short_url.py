@@ -3,7 +3,7 @@ import os
 from flask import request, redirect
 from urllib.parse import urlparse
 from flask_restx import Resource, Namespace, fields
-from model.URLmapping import db, URLMapping
+from app.model.URLmapping import db, URLMapping
 
 generate_quack_url = Namespace(
     "Generate Quack Link",

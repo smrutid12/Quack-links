@@ -1,8 +1,8 @@
 import os
 from flask import Flask
 from flask_cors import CORS
-from api import api
-from model.URLmapping import db
+from app.api import api
+from app.model.URLmapping import db
 
 app = Flask(__name__)
 
