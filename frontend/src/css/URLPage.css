@@ -646,6 +646,130 @@
   text-decoration: none;
 }
 
+.ql-history-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ql-history-copy,
+.ql-history-redirect,
+.ql-history-share,
+.ql-history-share-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 0.5px solid var(--ql-border);
+  background: var(--ql-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ql-muted);
+  transition: color 0.15s, background 0.15s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.ql-history-copy:hover,
+.ql-history-redirect:hover,
+.ql-history-share:hover,
+.ql-history-share-arrow:hover {
+  color: var(--ql-text);
+  background: var(--ql-track);
+  transform: translateY(-1px);
+}
+
+.ql-history-share-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ql-history-share-arrow {
+  width: 22px;
+  font-size: 11px;
+}
+
+.ql-history-share-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 150px;
+  background: #ffffff;
+  border: 0.5px solid var(--ql-border);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.14);
+  z-index: 80;
+  animation: qlSharePop 0.16s ease;
+}
+
+.ql-history-share-menu a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 9px;
+  color: var(--ql-text);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.ql-history-share-menu a:hover {
+  background: var(--ql-bg);
+}
+
+.ql-history-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 8px;
+}
+
+.ql-history-clear {
+  border: none;
+  background: transparent;
+  color: var(--ql-muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.ql-history-clear:hover {
+  color: var(--ql-text);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+@keyframes qlSharePop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 520px) {
+  .ql-history-actions {
+    gap: 5px;
+  }
+
+  .ql-history-share-menu {
+    right: 0;
+    width: 145px;
+  }
+}
+
 @keyframes qlSlideUp {
   from {
     opacity: 0;

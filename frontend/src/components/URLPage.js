@@ -1,7 +1,24 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { createQuackLink } from "../axios";
 import ShareButton from "./ShareButton";
 import "../css/URLPage.css";
+
+const HISTORY_CACHE_KEY = "quacklink_recent_history";
+const MAX_HISTORY_ITEMS = 8;
+
+function ShareIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="15"
+      height="15"
+      fill="currentColor"
+      viewBox="0 0 16 16"
+    >
+      <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3" />
+    </svg>
+  );
+}
 
 const DuckSVG = ({ size = 44 }) => (
   <svg
@@ -32,6 +49,113 @@ function isValidUrl(str) {
   }
 }
 
+function HistoryShareButton({ item }) {
+  const [open, setOpen] = useState(false);
+  const shareRef = useRef(null);
+
+  const shareText = `Check out this QuackLink: ${item.short}`;
+  const encodedUrl = encodeURIComponent(item.short);
+  const encodedText = encodeURIComponent(shareText);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (shareRef.current && !shareRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "QuackLink",
+          text: "Check out this QuackLink:",
+          url: item.short,
+        });
+        setOpen(false);
+      } catch {
+        // User cancelled share
+      }
+    } else {
+      setOpen((value) => !value);
+    }
+  };
+
+  const shareOptions = [
+    {
+      label: "WhatsApp",
+      href: `https://wa.me/?text=${encodedText}`,
+    },
+    {
+      label: "Email",
+      href: `mailto:?subject=${encodeURIComponent(
+        "Sharing a QuackLink",
+      )}&body=${encodedText}`,
+    },
+    {
+      label: "LinkedIn",
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    },
+    {
+      label: "Twitter / X",
+      href: `https://twitter.com/intent/tweet?text=${encodedText}`,
+    },
+  ];
+
+  return (
+    <div className="ql-history-share-wrap" ref={shareRef}>
+      <button
+        type="button"
+        className="ql-history-share"
+        onClick={handleNativeShare}
+        title="Share link"
+      >
+        <ShareIcon />
+      </button>
+
+      <button
+        type="button"
+        className="ql-history-share-arrow"
+        onClick={() => setOpen((value) => !value)}
+        title="Open share menu"
+      >
+        ▾
+      </button>
+
+      {open && (
+        <div className="ql-history-share-menu">
+          {shareOptions.map((option) => (
+            <a
+              key={option.label}
+              href={option.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+            >
+              {option.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function HistoryItem({ item }) {
   const [copied, setCopied] = useState(false);
 
@@ -45,15 +169,68 @@ function HistoryItem({ item }) {
     }
   };
 
+  const handleRedirect = () => {
+    window.open(item.short, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="ql-history-item">
       <span className="ql-history-short">{item.short}</span>
       <span className="ql-history-original">{item.original}</span>
-      <button className="ql-history-copy" onClick={handleCopy} title="Copy">
-        {copied ? "✓" : "⧉"}
-      </button>
+
+      <div className="ql-history-actions">
+        <button className="ql-history-copy" onClick={handleCopy} title="Copy">
+          {copied ? "✓" : "⧉"}
+        </button>
+
+        <button
+          className="ql-history-redirect"
+          onClick={handleRedirect}
+          title="Open link"
+        >
+          ↗
+        </button>
+
+        <HistoryShareButton item={item} />
+      </div>
     </div>
   );
+}
+
+function getCachedHistory() {
+  try {
+    const cached = localStorage.getItem(HISTORY_CACHE_KEY);
+
+    if (!cached) {
+      return [];
+    }
+
+    const parsed = JSON.parse(cached);
+
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    return parsed;
+  } catch {
+    return [];
+  }
+}
+
+function saveHistoryToCache(history) {
+  try {
+    localStorage.setItem(HISTORY_CACHE_KEY, JSON.stringify(history));
+  } catch {
+    // Ignore localStorage errors
+  }
+}
+
+function clearHistoryCache() {
+  try {
+    localStorage.removeItem(HISTORY_CACHE_KEY);
+  } catch {
+    // Ignore localStorage errors
+  }
 }
 
 export default function URLPage() {
@@ -66,7 +243,7 @@ export default function URLPage() {
   const [showReset, setShowReset] = useState(false);
   const [error, setError] = useState("");
   const [copyMsg, setCopyMsg] = useState("");
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(() => getCachedHistory());
   const [totalSaved, setTotalSaved] = useState(0);
 
   const transitionRef = useRef("2s");
@@ -75,6 +252,24 @@ export default function URLPage() {
     transitionRef.current = "0.35s";
     setIsDuckMoving(false);
     setBubbleText("Quack quack!");
+  }, []);
+
+  const addToHistory = useCallback((newItem) => {
+    setHistory((currentHistory) => {
+      const withoutDuplicate = currentHistory.filter(
+        (item) =>
+          item.short !== newItem.short && item.original !== newItem.original,
+      );
+
+      const updatedHistory = [newItem, ...withoutDuplicate].slice(
+        0,
+        MAX_HISTORY_ITEMS,
+      );
+
+      saveHistoryToCache(updatedHistory);
+
+      return updatedHistory;
+    });
   }, []);
 
   const handleShorten = useCallback(async () => {
@@ -123,9 +318,11 @@ export default function URLPage() {
           setTotalSaved((value) => value + saved);
         }
 
-        setHistory((items) =>
-          [{ short: result, original: url }, ...items].slice(0, 6)
-        );
+        addToHistory({
+          short: result,
+          original: url,
+          createdAt: new Date().toISOString(),
+        });
 
         setIsLoading(false);
       }, wait + 250);
@@ -137,12 +334,12 @@ export default function URLPage() {
         resetDuck();
         setError(
           err?.response?.data?.error ||
-            "Oops, something went wrong. Please try again."
+            "Oops, something went wrong. Please try again.",
         );
         setIsLoading(false);
       }, wait);
     }
-  }, [inputValue, isLoading, resetDuck]);
+  }, [inputValue, isLoading, resetDuck, addToHistory]);
 
   const handleReset = useCallback(() => {
     setInputValue("");
@@ -193,8 +390,8 @@ export default function URLPage() {
         </h1>
 
         <p className="ql-subtitle">
-          Paste any long URL and get a clean, shareable short link instantly.
-          No account. No fuss. Just quack.
+          Paste any long URL and get a clean, shareable short link instantly. No
+          account. No fuss. Just quack.
         </p>
 
         <div className="ql-card">
@@ -319,25 +516,30 @@ export default function URLPage() {
             <div className="ql-divider" />
 
             <div className="ql-stat">
-              <div className="ql-stat-num">
-                {totalSaved > 0 ? totalSaved : "—"}
-              </div>
-              <div className="ql-stat-label">Chars saved</div>
-            </div>
-
-            <div className="ql-divider" />
-
-            <div className="ql-stat">
               <div className="ql-stat-num">∞</div>
               <div className="ql-stat-label">Happy ducks</div>
             </div>
           </div>
         )}
 
-        {history.length > 1 && (
+        {history.length > 0 && (
           <div className="ql-history">
-            <div className="ql-history-title">Recent links</div>
-            {history.slice(1).map((item, index) => (
+            <div className="ql-history-head">
+              <div className="ql-history-title">Recent links</div>
+
+              <button
+                type="button"
+                className="ql-history-clear"
+                onClick={() => {
+                  setHistory([]);
+                  clearHistoryCache();
+                }}
+              >
+                Clear
+              </button>
+            </div>
+
+            {history.map((item, index) => (
               <HistoryItem key={`${item.short}-${index}`} item={item} />
             ))}
           </div>
