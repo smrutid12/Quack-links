@@ -92,10 +92,7 @@ class GetOriginalURL(Resource):
     @generate_quack_url.response(200, "Success", original_url_response_model)
     @generate_quack_url.response(404, "Not Found", error_response_model)
     def get(self, short_url_id):
-        """
-        Fetches the original URL as JSON.
-        This is used by React RedirectComponent.
-        """
+        """Fetches the original URL as JSON for React redirect."""
 
         url_mapping = URLMapping.query.filter_by(short_url=short_url_id).first()
 

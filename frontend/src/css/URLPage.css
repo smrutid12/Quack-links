@@ -710,7 +710,6 @@
   }
 }
 
-
 @media (max-width: 900px) {
   .ql-hero {
     padding-top: 4rem;
@@ -813,6 +812,19 @@
 
   .ql-cta {
     padding: 4rem 1rem;
+  }
+  .ql-result-row {
+    flex-wrap: wrap;
+  }
+
+  .ql-short-url {
+    width: 100%;
+    flex-basis: 100%;
+    min-height: 36px;
+  }
+
+  .ql-icon-btn {
+    flex: 1;
   }
 }
 

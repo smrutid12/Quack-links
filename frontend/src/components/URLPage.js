@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { createQuackLink } from "../axios";
+import ShareButton from "./ShareButton";
 import "../css/URLPage.css";
 
 const DuckSVG = ({ size = 44 }) => (
@@ -282,6 +283,7 @@ export default function URLPage() {
                 >
                   ↗
                 </a>
+                <ShareButton shortUrl={shortUrl} />
               </div>
 
               {copyMsg && <div className="ql-copy-feedback">{copyMsg}</div>}

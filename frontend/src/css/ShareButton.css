@@ -1,0 +1,124 @@
+.ql-share-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ql-share-main-btn,
+.ql-share-arrow-btn {
+  height: 36px;
+  border: 1px solid rgba(27, 107, 58, 0.2);
+  background: #ffffff;
+  color: #1B6B3A;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: transform 0.15s, background 0.15s, border-color 0.15s;
+}
+
+.ql-share-main-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  border-radius: 8px 0 0 8px;
+}
+
+.ql-share-arrow-btn {
+  width: 30px;
+  border-left: 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.ql-share-main-btn:hover,
+.ql-share-arrow-btn:hover {
+  background: rgba(27, 107, 58, 0.05);
+  transform: translateY(-1px);
+}
+
+.ql-share-main-btn:disabled,
+.ql-share-arrow-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ql-share-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.ql-share-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 190px;
+  background: #ffffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  padding: 6px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+  z-index: 50;
+  animation: qlSharePop 0.16s ease;
+}
+
+.ql-share-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 38px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: #1A1A1A;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.ql-share-menu-item:hover {
+  background: #FAFAF8;
+  transform: translateX(2px);
+}
+
+.ql-share-menu-icon {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #0B7285;
+  flex-shrink: 0;
+}
+
+@keyframes qlSharePop {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 520px) {
+  .ql-share-wrap {
+    width: 100%;
+  }
+
+  .ql-share-main-btn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .ql-share-menu {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+}

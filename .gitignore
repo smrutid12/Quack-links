@@ -25,6 +25,7 @@ yarn-error.log*
 
 # backend
 /pycache
+/api/__pycache__
 
 #common
 .env
