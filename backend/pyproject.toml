@@ -1,2 +1,7 @@
-[tool.vercel]
-entrypoint = "run.py"
+[project]
+name = "quacklinks-backend"
+version = "0.1.0"
+dependencies = []
+
+[project.scripts]
+app = "run:app"
