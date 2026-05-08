@@ -12,6 +12,8 @@ function SmallDuck() {
 }
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="ql-footer">
       <div className="ql-footer-inner">
@@ -20,10 +22,11 @@ export default function Footer() {
             <SmallDuck />
             QuackLink
           </div>
+
           <p className="ql-footer-tag">
-            Short links. Happy ducks.
+            A personal URL shortener project.
             <br />
-            Zero fuss.
+            Built with React, Flask, and a little quack.
           </p>
         </div>
 
@@ -32,25 +35,82 @@ export default function Footer() {
             <span className="ql-footer-title">Product</span>
             <a href="#features">Features</a>
             <a href="#start">Shorten URL</a>
+            <a href="/">QR Code</a>
           </div>
 
           <div className="ql-footer-col">
-            <span className="ql-footer-title">Company</span>
-            <a href="/">About</a>
-            <a href="/">Contact</a>
+            <span className="ql-footer-title">Creator</span>
+            <a
+              href="https://smrutidash.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Portfolio
+            </a>
+            <a
+              href="https://github.com/smrutid12"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://www.linkedin.com/in/smrutid12"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+          </div>
+
+          <div className="ql-footer-col">
+            <span className="ql-footer-title">Project</span>
+            <a
+              href="https://github.com/smrutid12/Quack-links"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About QuackLink
+            </a>
+            <a
+              href="https://www.smrutidash.com/contact"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contact
+            </a>
+            <a
+              href="https://www.smrutidash.com/projects"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              More Projects
+            </a>
           </div>
 
           <div className="ql-footer-col">
             <span className="ql-footer-title">Legal</span>
-            <a href="/">Privacy</a>
-            <a href="/">Terms</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Use</a>
+            <a href="/disclaimer">Disclaimer</a>
           </div>
         </div>
       </div>
 
       <div className="ql-footer-bottom">
-        <span>© 2026 QuackLink. All rights reserved.</span>
-        <span>🦆 Made with quack</span>
+        <span>© {currentYear} QuackLink. All rights reserved.</span>
+        <span>
+          Project by{" "}
+          <a
+            href="https://smrutidash.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ql-footer-credit"
+          >
+            Smruti Dash
+          </a>{" "}
+          🦆
+        </span>
       </div>
     </footer>
   );
