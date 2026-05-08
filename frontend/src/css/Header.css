@@ -1,24 +1,134 @@
-/* src/components/Header.css */
-.header {
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+.ql-header {
+  width: 100%;
+  background: #FAFAF8;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.ql-header-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 clamp(1rem, 5vw, 5rem);
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 2px dashed black;
 }
 
-.icon-dropdown {
-  position: relative;
-  border: 1px solid black;
-  border-radius: 50%;
-  max-width: 40px;
-  max-height: 40px;
-  overflow: hidden;
+.ql-logo {
+  display: flex;
   align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  outline: none;
 }
 
-.icon-image {
-  text-align: center;
-  width: 50px;
-  height: 50px;
+.ql-logo-duck {
+  width: 36px;
+  height: 36px;
+  background: #FFF8E1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.ql-logo:hover .ql-logo-duck {
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.ql-logo-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #1A1A1A;
+  letter-spacing: -0.03em;
+}
+
+.ql-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ql-nav-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6B6B6B;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.ql-nav-link:hover {
+  color: #1A1A1A;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.ql-nav-cta {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1A1A1A;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 10px;
+  background: #F5C518;
+  border: 1.5px solid transparent;
+  margin-left: 8px;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.ql-nav-cta:hover {
+  background: #f0bb0a;
+  transform: scale(1.02);
+}
+
+@media (max-width: 480px) {
+  .ql-header-inner {
+    padding: 0 1rem;
+  }
+
+  .ql-nav-link {
+    display: none;
+  }
+
+  .ql-nav-cta {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .ql-header-inner {
+    height: 58px;
+    padding: 0 1rem;
+  }
+
+  .ql-logo-text {
+    font-size: 1.05rem;
+  }
+
+  .ql-logo-duck {
+    width: 32px;
+    height: 32px;
+  }
+
+  .ql-nav-link {
+    display: none;
+  }
+
+  .ql-nav-cta {
+    margin-left: 0;
+    padding: 7px 14px;
+    font-size: 0.8rem;
+  }
 }
