@@ -18,7 +18,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 CORS(
     app,
-    origins=["http://localhost:3000", "https://quacklinks.com"],
+    origins=[
+        "http://localhost:3000",
+        "https://quacklinks.com",
+        "https://www.quacklinks.com",
+        r"https://.*\.vercel\.app",
+    ],
     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization"],
 )
