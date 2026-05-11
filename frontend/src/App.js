@@ -9,6 +9,7 @@ import PrivacyPolicy from "./components/legal/PrivacyPolicy";
 import TermsOfUse from "./components/legal/TermsOfUse";
 import Disclaimer from "./components/legal/Disclaimer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
 
         <Footer />
       </div>
+      <Analytics />
     </Router>
   );
 }
