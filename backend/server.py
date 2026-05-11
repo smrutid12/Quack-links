@@ -1,0 +1,50 @@
+import os
+import re
+from flask import Flask
+from flask_cors import CORS
+
+from app.api import api
+from app.model.URLmapping import db
+
+app = Flask(__name__)
+
+POSTGRES_USERNAME = os.getenv("POSTGRES_USERNAME")
+POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+POSTGRES_HOST = os.getenv("POSTGRES_HOST")
+POSTGRES_DATABASE = os.getenv("POSTGRES_DATABASE")
+POSTGRES_PORT = int(os.getenv("POSTGRES_PORT", "5432"))
+
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    f"postgresql://{POSTGRES_USERNAME}:{POSTGRES_PASSWORD}"
+    f"@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DATABASE}"
+)
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db.init_app(app)
+
+CORS(
+    app,
+    origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://quacklinks.com",
+        "https://www.quacklinks.com",
+        re.compile(r"https://.*\.vercel\.app"),
+    ],
+    methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Content-Type", "Authorization"],
+)
+
+api.init_app(app)
+
+
+@app.get("/")
+def health_check():
+    return {
+        "status": "ok",
+        "message": "QuackLink backend is running"
+    }, 200
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5000)
