@@ -244,7 +244,6 @@ export default function URLPage() {
   const [error, setError] = useState("");
   const [copyMsg, setCopyMsg] = useState("");
   const [history, setHistory] = useState(() => getCachedHistory());
-  const [totalSaved, setTotalSaved] = useState(0);
 
   const transitionRef = useRef("2s");
 
@@ -312,11 +311,6 @@ export default function URLPage() {
         setShortUrl(result);
         setShowResult(true);
         setShowReset(true);
-
-        const saved = url.length - result.length;
-        if (saved > 0) {
-          setTotalSaved((value) => value + saved);
-        }
 
         addToHistory({
           short: result,
