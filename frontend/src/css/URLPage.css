@@ -747,6 +747,102 @@
   background: rgba(0, 0, 0, 0.05);
 }
 
+
+.ql-qr-box {
+  margin-top: 14px;
+  border: 1px solid rgba(245, 197, 24, 0.35);
+  border-radius: 18px;
+  background: rgba(255, 248, 220, 0.72);
+  overflow: hidden;
+}
+
+.ql-qr-toggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #3b2b00;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 13px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ql-qr-toggle:hover {
+  background: rgba(245, 197, 24, 0.16);
+}
+
+.ql-qr-content {
+  border-top: 1px solid rgba(245, 197, 24, 0.28);
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.ql-qr-preview {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(59, 43, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.ql-qr-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.ql-qr-title {
+  color: #2d2200;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.ql-qr-info p {
+  margin: 0;
+  color: rgba(45, 34, 0, 0.72);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.ql-qr-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.ql-qr-actions button {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 13px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: #2d2200;
+  background: #f5c518;
+  box-shadow: 0 8px 16px rgba(245, 197, 24, 0.22);
+}
+
+.ql-qr-actions button:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .ql-qr-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ql-qr-actions {
+    justify-content: center;
+  }
+}
+
 @keyframes qlSharePop {
   from {
     opacity: 0;

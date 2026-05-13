@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { createQuackLink } from "../axios";
 import ShareButton from "./ShareButton";
+import QRCodeBox from "./QRCodeBox";
 import "../css/URLPage.css";
 
 const HISTORY_CACHE_KEY = "quacklink_recent_history";
@@ -476,6 +477,7 @@ export default function URLPage() {
                 </a>
                 <ShareButton shortUrl={shortUrl} />
               </div>
+              <QRCodeBox value={shortUrl} />
 
               {copyMsg && <div className="ql-copy-feedback">{copyMsg}</div>}
             </div>
@@ -581,14 +583,6 @@ export default function URLPage() {
           </div>
 
           <div className="ql-feature-card">
-            <div className="ql-feature-icon">🔗</div>
-            <div className="ql-feature-title">Clean short links</div>
-            <div className="ql-feature-desc">
-              Beautiful short links that you'd actually want to share.
-            </div>
-          </div>
-
-          <div className="ql-feature-card">
             <div className="ql-feature-icon">📋</div>
             <div className="ql-feature-title">One-click copy</div>
             <div className="ql-feature-desc">
@@ -601,6 +595,14 @@ export default function URLPage() {
             <div className="ql-feature-title">Mobile friendly</div>
             <div className="ql-feature-desc">
               Shorten and open links smoothly on every screen size.
+            </div>
+          </div>
+
+          <div className="ql-feature-card">
+            <div className="ql-feature-icon">▦</div>
+            <div className="ql-feature-title">QR code sharing</div>
+            <div className="ql-feature-desc">
+              Turn every shortened link into a scannable QR code instantly.
             </div>
           </div>
 
