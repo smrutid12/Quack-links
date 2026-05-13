@@ -5,7 +5,7 @@ import { QRCodeCanvas } from "qrcode.react";
 export default function QRCodeBox({ value }) {
   const qrRef = useRef(null);
   const [open, setOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [shared, setShared] = useState(false);
 
   if (!value) return null;
 
@@ -25,13 +25,28 @@ export default function QRCodeBox({ value }) {
     document.body.removeChild(downloadLink);
   };
 
-  const handleCopyLink = async () => {
+  const handleShare = async () => {
+    const shareData = {
+      title: "QuackLink QR Code",
+      text: "Scan or open this QuackLink:",
+      url: value,
+    };
+
     try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        setShared(true);
+        setTimeout(() => setShared(false), 1600);
+        return;
+      }
+
+      // Fallback for desktop browsers that don't support native share
       await navigator.clipboard.writeText(value);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1600);
+      setShared(true);
+      setTimeout(() => setShared(false), 1600);
     } catch {
-      setCopied(false);
+      // User cancelled share or browser blocked it
+      setShared(false);
     }
   };
 
@@ -70,8 +85,8 @@ export default function QRCodeBox({ value }) {
                 Download PNG
               </button>
 
-              <button type="button" onClick={handleCopyLink}>
-                {copied ? "Copied ✓" : "Copy link"}
+              <button type="button" onClick={handleShare}>
+                {shared ? "Shared ✓" : "Share"}
               </button>
             </div>
           </div>
